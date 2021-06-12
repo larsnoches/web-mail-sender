@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('./partial/head'); %>
+</head>
+<body>
+  <div class="container">  
+    <form id="contact" action="" method="post">
+      <h3>Форма отправки писем</h3>
+      <p id="msg-status"></p>
+      <fieldset>
+        <input id="email-to" placeholder="Кому" type="email" tabindex="1" required>
+      </fieldset>
+      <fieldset>
+        <input id="email-subject" placeholder="Тема" type="text" tabindex="2" required autofocus>
+      </fieldset>
+      <fieldset>
+        <textarea id="email-text" placeholder="Сообщение..." tabindex="3" required></textarea>
+      </fieldset>
+      <fieldset>
+        <button name="submit" type="submit" id="contact-submit" data-submit="...Отправка" data-send="Отправить">Отправить</button>
+      </fieldset>
+    </form>
+  </div>
+
+  <%- include('./partial/vanilla'); %>
+</body>
+</html>

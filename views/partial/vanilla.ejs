@@ -1,0 +1,65 @@
+<script type="text/javascript">
+  let msgStatus = document.querySelector('#msg-status');
+  let contactForm = document.querySelector('#contact');
+
+  let contactSubmit = document.querySelector('#contact-submit');
+  let sendingLabel = contactSubmit.getAttribute('data-submit');
+  let sendLabel = contactSubmit.getAttribute('data-send');
+  
+  contactForm.addEventListener('submit', async (ev) => {
+    let to = document.querySelector('#email-to')?.value;
+    let subject = document.querySelector('#email-subject')?.value;
+    let text = document.querySelector('#email-text')?.value;
+
+    ev.preventDefault();
+
+    try {
+      contactSubmit.textContent = sendingLabel;
+      contactSubmit.disabled = true;
+
+      let msg = {
+        to, subject, text,
+      };
+
+      let response = await fetch('/api/v1/mail/send-msg', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(msg)
+      });
+
+      let result = await response.json();
+      
+      if (result?.status === 'ok') {
+        msgStatus.textContent = 'Письмо отправлено';
+        msgStatus.className = 'success';
+        setTimeout(() => {
+          msgStatus.textContent = '';
+          msgStatus.className = 'hidden';
+          contactSubmit.disabled = false;
+          contactSubmit.textContent = sendLabel;
+        }, 3000);
+      } else {
+        msgStatus.textContent = 'Письмо не отправлено';
+        msgStatus.className = 'error';
+        setTimeout(() => {
+          msgStatus.textContent = '';
+          msgStatus.className = 'hidden';
+          contactSubmit.disabled = false;
+          contactSubmit.textContent = sendLabel;
+        }, 3000);
+      }
+    } catch (er) {
+      //
+      msgStatus.textContent = 'Ошибка';
+      msgStatus.className = 'error';
+      setTimeout(() => {
+        msgStatus.textContent = '';
+        msgStatus.className = 'hidden';
+        contactSubmit.disabled = false;
+        contactSubmit.textContent = sendLabel;
+      }, 3000);
+    }
+  });
+</script>

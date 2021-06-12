@@ -1,0 +1,2 @@
+# Mail sender
+This is a web application for corporate needs. The frontend is written in vanilla javascript. The back-end is represented by a typescript node.js application with an express.js framework and a nodemailer library. This project uses yarn 2.

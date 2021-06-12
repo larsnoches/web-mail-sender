@@ -1,0 +1,12 @@
+{
+  "server": {
+    "port": 8080
+  },
+  "mail": {
+    "server": "smtp.real.kamchatka.ru",
+    "port": 465,
+    "secure": true,
+    "email": "ivan@real.kamchatka.ru",
+    "password": "12345"
+  }
+}
